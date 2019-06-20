@@ -31,7 +31,7 @@ public class DepartamentoDAO implements ServicioDepartamento {
 				lista = new LinkedList<Departamento>();
 				while (rs.next()) {
 					Departamento depto = new Departamento();
-					depto.setId(rs.getInt(1));
+					depto.setId_departamento(rs.getInt(1));
 					depto.setDescripcion(rs.getString(2));					
 					lista.add(depto);
 				}
@@ -93,7 +93,7 @@ public class DepartamentoDAO implements ServicioDepartamento {
 				while (rs.next()) {
 					depto = new Departamento();
 					
-					depto.setId(rs.getInt(1));
+					depto.setId_departamento(rs.getInt(1));
 					depto.setDescripcion(rs.getString(2));
 				}
 				st.close();
@@ -120,7 +120,7 @@ public class DepartamentoDAO implements ServicioDepartamento {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
 				st.setString(1, depto.getDescripcion());
-				st.setInt(2, depto.getId());
+				st.setInt(2, depto.getId_departamento());
 				
 				int exec = st.executeUpdate();
 				if (exec == 0) {

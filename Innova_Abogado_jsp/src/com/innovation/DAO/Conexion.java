@@ -14,7 +14,7 @@ public class Conexion {
 		Connection cn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/innovdb", "root", "NuevaEmpresaIcon123");
+			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/innovdb", "root", "1234");
 		} 
 		catch (SQLException | ClassNotFoundException ex) {
         SetMensaje(ex.getMessage());

@@ -80,7 +80,7 @@ public class ServletDepartamento extends HttpServlet {
 		case "UPD":
 			 depto = new Departamento();
 			 depto.setDescripcion(request.getParameter("descripcion_depto"));
-			 depto.setId(Integer.parseInt(request.getParameter("id_depto")));
+			 depto.setId_departamento(Integer.parseInt(request.getParameter("id_depto")));
 			 servicio.Actualizar(depto);
 			 mensaje = servicio.GetMensaje();
 				if (mensaje != null) {

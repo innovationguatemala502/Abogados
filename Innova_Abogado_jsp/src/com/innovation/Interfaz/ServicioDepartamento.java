@@ -10,7 +10,7 @@ public interface ServicioDepartamento {
 	
 	public void Insertar(Departamento depto);
 	
-	public Departamento Buscar(int id);
+	public Departamento Buscar(int id_departamento);
 	
 	public void Actualizar(Departamento depto);
 	

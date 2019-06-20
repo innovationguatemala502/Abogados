@@ -199,7 +199,7 @@
 							<ul class="collapse" id="sistema" data-parent="#sidebar-menu">
 								<div class="sub-menu">
 									<li><a class="sidenav-item-link"
-										href="#"> <span class="nav-text">Crear Usuario</span>
+										href="../Innova_Abogado_jsp/Usuario?accion=SPA"> <span class="nav-text">Crear Usuario</span>
 									</a></li>
 									<li><a class="sidenav-item-link"
 										href="#"> <span class="nav-text">

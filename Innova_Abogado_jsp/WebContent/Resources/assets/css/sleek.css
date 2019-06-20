@@ -51,8 +51,28 @@ html {
 @-ms-viewport {
   width: device-width; }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, header, hgroup, main, nav, section {
   display: block; }
+
+/*footer*/
+div[class*="columna"]{
+  display: flex;
+  flex-direction: column;
+  padding-left: 8%;
+  color: black;
+  
+}
+
+div[class="columna2"]{
+	font-size-adjust: 0.4;
+}
+footer{
+  background-color: #ffffff !important;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
+}
 
 body {
   margin: 0;

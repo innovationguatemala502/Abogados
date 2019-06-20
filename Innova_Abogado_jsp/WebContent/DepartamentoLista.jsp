@@ -30,14 +30,14 @@
 												<tbody>
 												<c:forEach var="n" items="${lista}">
 													<tr>
-														<td>${n.id}</td>
+														<td>${n.id_departamento}</td>
 														<td>${n.descripcion}</td>
 														<td style="text-align: center"><a href="#Actualizar_Modal" class="mb-1 btn btn-sm btn-info" 
-                                               			data-toggle="modal" data-book-id="${n.id}" data-book-id2="${n.descripcion}">
+                                               			data-toggle="modal" data-book-id="${n.id_departamento}" data-book-id2="${n.descripcion}">
                                                 		<span class="mdi mdi-update"> Actualizar</span></a></td>
                                                 		
                                                 		<td style="text-align: center"><a href="#Eliminar_Modal" class="mb-1 btn btn-sm btn-danger" 
-                                               			data-toggle="modal" data-book-id="${n.id}" >
+                                               			data-toggle="modal" data-book-id="${n.id_departamento}" >
                                                 		<span class="mdi mdi-delete"> Eliminar</span></a></td>
 													</tr>
 												</c:forEach>
