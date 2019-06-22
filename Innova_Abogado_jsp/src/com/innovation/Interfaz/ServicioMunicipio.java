@@ -6,7 +6,7 @@ import com.innovation.modelo.Municipio;
 
 public interface ServicioMunicipio {
 
-public List<Municipio> mostra();
+	public List<Municipio> mostra();
 	
 	public void Insertar(Municipio muni);
 	
@@ -18,5 +18,4 @@ public List<Municipio> mostra();
 	
 	public String GetMensaje();
 
-	
 }

@@ -208,6 +208,9 @@
 									<li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">Eliminar Usuario</span>
 									</a></li>
+									<li><a class="sidenav-item-link"
+										href="../Innova_Abogado_jsp/JuzgadoCrear.jsp?accion=SPA"> <span class="nav-text">Crear Juzgado</span>
+									</a></li>
 								</div>
 							</ul></li>
 						</li>
