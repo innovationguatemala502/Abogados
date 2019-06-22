@@ -319,8 +319,8 @@
 				</div>
 				<div class="columna2">
 					<h4>Frase</h4>
-					<p>El buen médico trata la enfermedad; el gran médico</p>
-					<p>trata al paciente que tiene la enfermedad</p>
+					<p>Abogado es la única profesión donde cuantos más hay,</p>
+					<p>más son necesarios.</p>
 				</div>
 				<div class="columna3">
 					<h4>Redes sociales</h4>

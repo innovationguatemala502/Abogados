@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.innovation.Interfaz.ServicioUsuario;
 import com.innovation.daoModelo.UsuarioDAO;
 import com.innovation.modelo.Departamento;
+import com.innovation.modelo.Municipio;
+import com.innovation.modelo.TipoUsuario;
 import com.innovation.modelo.Usuario;
 
 /**
@@ -72,17 +74,29 @@ public class ServletUsuario extends HttpServlet {
 			servicio.Insertar(usuario);
 			mensaje = servicio.GetMensaje();
 			if (mensaje != null) {
-				direccion ="UsuarioCrear.jsp";
+				direccion ="UsuarioCrear.jsp?accion=SPA";
 			} else {
-				direccion ="UsuarioCrear.jsp";
+				direccion ="UsuarioCrear.jsp?accion=SPA";
 				msjCreado = "Usuario Creado exitosamente!!!";
 			}
 			break;
 		
 		case "SPA":
 			List<Departamento> listadepartamento = servicio.BuscarDepartamento();
+			List<Municipio> listamunicipio = servicio.BuscarMunicipio();
+			List<TipoUsuario> listaTipoUsuario = servicio.BuscarTipoUsuario();
 			if (listadepartamento != null) {
 				request.setAttribute("listadepartamento", listadepartamento);
+			} else {
+				mensaje = servicio.GetMensaje();
+			}
+			if (listamunicipio != null) {
+				request.setAttribute("listamunicipio", listamunicipio);
+			} else {
+				mensaje = servicio.GetMensaje();
+			}
+			if (listaTipoUsuario != null) {
+				request.setAttribute("listaTipoUsuario", listaTipoUsuario);
 			} else {
 				mensaje = servicio.GetMensaje();
 			}

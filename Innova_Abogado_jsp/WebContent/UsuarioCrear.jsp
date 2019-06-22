@@ -48,10 +48,12 @@
 				</select>			
 			</div>
 			<div class="form-group">
-				<label for="InputId_Municipio">Municipio</label>
-				<input type="text" class="form-control" id="InputId_Municipio"
-								name="id_municipio" value="${usuario.id_municipio}"
-								placeholder="Municipio donde vive el Usuario">
+				<label for="InputId_municipio">Municipio</label>								
+				<select class="form-control" id="InputId_departamento" name="id_municipio">
+				<c:forEach var="n" items="${listamunicipio}">
+					<option value="${n.id_municipio}">${n.descripcion}</option>
+				</c:forEach>
+				</select>			
 			</div>
 			<div class="form-group">
 				<label for="InputTelefono">Numero de telefono</label>
@@ -72,10 +74,12 @@
 								placeholder="Password del Usuario">
 			</div>
 			<div class="form-group">
-				<label for="InputTipo_usuario">Tipo de usuario</label>
-				<input type="text" class="form-control" id="InputTipo_usuario"
-								name="tipo_usuario" value="${usuario.tipo_usuario}"
-								placeholder="tipo de usuario">
+				<label for="InputTipo_usuario">Tipo Usuario</label>								
+				<select class="form-control" id="InputTipo_usuario" name="tipo_usuario">
+				<c:forEach var="n" items="${listaTipoUsuario}">
+					<option value="${n.tipo_usuario}">${n.descripcion}</option>
+				</c:forEach>
+				</select>			
 			</div>			
 			  	   
 				   <button type="submit" class="btn btn-primary">Crear</button>

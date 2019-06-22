@@ -10,6 +10,8 @@ import java.util.List;
 import com.innovation.DAO.Conexion;
 import com.innovation.Interfaz.ServicioUsuario;
 import com.innovation.modelo.Departamento;
+import com.innovation.modelo.Municipio;
+import com.innovation.modelo.TipoUsuario;
 import com.innovation.modelo.Usuario;
 
 public class UsuarioDAO implements ServicioUsuario {
@@ -75,6 +77,69 @@ public class UsuarioDAO implements ServicioUsuario {
 					dep.setId_departamento(rs.getInt(1));
 					dep.setDescripcion(rs.getString(2));
 					lista.add(dep);
+				}
+				st.close();
+			} catch (SQLException e) {
+				SetMensaje("Problema con Consultar: " + e.getMessage());
+			} finally {
+				try {
+					cn.close();
+				}catch (SQLException ex) {
+					 SetMensaje(ex.getMessage());
+				}
+			}
+		} else {
+			SetMensaje("Error de conexion: " + db.GetMessage());
+		}
+		return lista;
+	}
+	
+	public List<Municipio> BuscarMunicipio() {
+		List<Municipio> lista = null;
+		String sentencia = "select id_Municipio, descripcion,id_departamento from municipio";
+		Connection cn = db.Conectar();
+		if (cn != null ) {
+			try {
+				PreparedStatement st = cn.prepareStatement(sentencia);
+				ResultSet rs = st.executeQuery();
+				lista = new LinkedList<Municipio>();
+				while (rs.next()) {
+					Municipio muni = new Municipio();
+					muni.setId_municipio(rs.getInt(1));
+					muni.setDescripcion(rs.getString(2));
+					muni.setId_departamento(rs.getInt(3));
+					lista.add(muni);
+				}
+				st.close();
+			} catch (SQLException e) {
+				SetMensaje("Problema con Consultar: " + e.getMessage());
+			} finally {
+				try {
+					cn.close();
+				}catch (SQLException ex) {
+					 SetMensaje(ex.getMessage());
+				}
+			}
+		} else {
+			SetMensaje("Error de conexion: " + db.GetMessage());
+		}
+		return lista;
+	}
+	
+	public List<TipoUsuario> BuscarTipoUsuario() {
+		List<TipoUsuario> lista = null;
+		String sentencia = "select tipo_usuario, descripcion from tipo_usuario";
+		Connection cn = db.Conectar();
+		if (cn != null ) {
+			try {
+				PreparedStatement st = cn.prepareStatement(sentencia);
+				ResultSet rs = st.executeQuery();
+				lista = new LinkedList<TipoUsuario>();
+				while (rs.next()) {
+					TipoUsuario tipo_usuario = new TipoUsuario();
+					tipo_usuario.setTipo_usuario(rs.getInt(1));
+					tipo_usuario.setDescripcion(rs.getString(2));
+					lista.add(tipo_usuario);
 				}
 				st.close();
 			} catch (SQLException e) {
