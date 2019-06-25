@@ -211,6 +211,10 @@
 									<li><a class="sidenav-item-link"
 										href="../Innova_Abogado_jsp/Juzgado?accion=SPA"> <span class="nav-text">Crear Juzgado</span>
 									</a></li>
+									<li><a class="sidenav-item-link"
+										href="../Innova_Abogado_jsp/Comentario?accion=SPA"> <span class="nav-text">Crear Comentario</span>
+									</a></li>
+									
 								</div>
 							</ul></li>
 						</li>

@@ -42,7 +42,7 @@ public class ServletJuzgado extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "JuzgadoCrear.jsp";
+			direccion = "Juzgado.jsp";
 			break;
 			
 		case "INS":
@@ -98,9 +98,9 @@ public class ServletJuzgado extends HttpServlet {
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
 					request.setAttribute("Juzgado",juzgadoact);
-					direccion ="JuzgadoCrear.jsp?accion=QRY";
+					direccion ="Juzgado.jsp?accion=QRY";
 				} else {
-					direccion ="JuzgadoCrear.jsp?accion=QRY";
+					direccion ="Juzgado.jsp?accion=QRY";
 					msjCreado = "Juzgado Modificado exitosamente!!!";
 				}
 			break;
@@ -112,12 +112,12 @@ public class ServletJuzgado extends HttpServlet {
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);
 				mensaje = servicio.GetMensaje();
-				msjCreado = "Usuario Eliminado exitosamente!!!";
+				msjCreado = "Juzgado Eliminado exitosamente!!!";
 				
 			} else {
-				direccion ="JuzgadoCrear.jsp?accion=QRY";
+				direccion ="Juzgado.jsp?accion=QRY";
 			}
-			direccion ="JuzgadoCrear.jsp?accion=QRY";
+			direccion ="Juzgado.jsp?accion=QRY";
 			break;
 		
 		}
