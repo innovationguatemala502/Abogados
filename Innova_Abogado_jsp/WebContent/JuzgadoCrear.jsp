@@ -18,13 +18,13 @@
 			<div class="form-group">
 				<label for="InputNombre_juzgado">Nombre del Juzgado</label>
 				<input type="text" class="form-control" id="InputNombre_juzgado"
-								name="nombre_juzgado" value="${juzgado.nombre_juzgado}"
+								name="nombre_juzgado" value="${usuario.nombre_juzgado}"
 								placeholder="Nombre del Juzgado">
 			</div>
 			<div class="form-group">
 				<label for="InputDireccion">Direccion del Juzgado</label>
 				<input type="text" class="form-control" id="InputDireccion"
-								name="direccion" value="${juzgado.direccion}"
+								name="direccion" value="${usuario.direccion}"
 								placeholder="Direccion del Juzgado">
 			</div>
 			<div class="form-group">
@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-group">
 				<label for="InputId_municipio">Municipio</label>								
-				<select class="form-control" id="InputId_departamento" name="id_municipio">
+				<select class="form-control" id="InputId_municipio" name="id_municipio">
 				<c:forEach var="n" items="${listmunicipio}">
 					<option value="${n.id_municipio}">${n.descripcion}</option>
 				</c:forEach>
@@ -46,13 +46,13 @@
 			<div class="form-group">
 				<label for="InputNombre_encargado">Nombre del Lic. encargado del caso</label>
 				<input type="text" class="form-control" id="InputNombre_encargado"
-								name="nombre_encargado" value="${juzgado.nombre_encargado}"
+								name="nombre_encargado" value="${usuario.nombre_encargado}"
 								placeholder="Nombre del Lic. encargado del caso">
 			</div>			
 			<div class="form-group">
 				<label for="InputTelefono">Numero de telefono</label>
 				<input type="text" class="form-control" id="InputTelefono"
-								name="telefono" value="${juzgado.telefono}"
+								name="telefono" value="${usuario.telefono}"
 								placeholder="Numero de telefono del Lic. encargado del caso">
 			</div>			
 				   <button type="submit" class="btn btn-primary">Crear</button>

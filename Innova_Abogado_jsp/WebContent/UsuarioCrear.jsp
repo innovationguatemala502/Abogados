@@ -49,7 +49,7 @@
 			</div>
 			<div class="form-group">
 				<label for="InputId_municipio">Municipio</label>								
-				<select class="form-control" id="InputId_departamento" name="id_municipio">
+				<select class="form-control" id="InputId_municipio" name="id_municipio">
 				<c:forEach var="n" items="${listamunicipio}">
 					<option value="${n.id_municipio}">${n.descripcion}</option>
 				</c:forEach>

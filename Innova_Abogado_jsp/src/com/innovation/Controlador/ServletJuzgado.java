@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import com.innovation.modelo.Departamento;
 import com.innovation.modelo.Juzgado;
 import com.innovation.modelo.Municipio;
 
+@WebServlet("/Juzgado")
 public class ServletJuzgado extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -40,7 +42,7 @@ public class ServletJuzgado extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Juzgado.jsp";
+			direccion = "JuzgadoCrear.jsp";
 			break;
 			
 		case "INS":
@@ -72,7 +74,6 @@ public class ServletJuzgado extends HttpServlet {
 			List<Municipio> listmunicipio = servicio.BuscarMunicipio();
 			if (listdepartamento != null) {
 				request.setAttribute("listdepartamento", listdepartamento);
-				System.out.println("Lista de departamentos : " + listdepartamento);
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
@@ -81,7 +82,7 @@ public class ServletJuzgado extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "JuzgadoCrear.jsp";
+			direccion = "JuzgadoCrear.jsp?accion=SPA";
 			break;	
 			
 		case "ACT":
@@ -97,9 +98,9 @@ public class ServletJuzgado extends HttpServlet {
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
 					request.setAttribute("Juzgado",juzgadoact);
-					direccion ="Juzgado?accion=QRY";
+					direccion ="JuzgadoCrear.jsp?accion=QRY";
 				} else {
-					direccion ="Juzgado?accion=QRY";
+					direccion ="JuzgadoCrear.jsp?accion=QRY";
 					msjCreado = "Juzgado Modificado exitosamente!!!";
 				}
 			break;
@@ -114,9 +115,9 @@ public class ServletJuzgado extends HttpServlet {
 				msjCreado = "Usuario Eliminado exitosamente!!!";
 				
 			} else {
-				direccion ="Juzgado?accion=QRY";
+				direccion ="JuzgadoCrear.jsp?accion=QRY";
 			}
-			direccion ="Juzgado?accion=QRY";
+			direccion ="JuzgadoCrear.jsp?accion=QRY";
 			break;
 		
 		}

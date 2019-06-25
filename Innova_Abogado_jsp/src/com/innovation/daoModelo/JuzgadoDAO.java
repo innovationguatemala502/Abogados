@@ -59,7 +59,7 @@ public class JuzgadoDAO implements ServicioJuzgado {
 
 	@Override
 	public void Insertar(Juzgado juzgado) {
-		String sentencia = "Insert into municipio (nombre_juzgado,direccion,id_departamento,id_municipio,nombre_encargado,telefono) values (?,?,?,?,?)";
+		String sentencia = "Insert into juzgado (nombre_juzgado,direccion,id_departamento,id_municipio,nombre_encargado,telefono) values (?,?,?,?,?,?)";
 		Connection cn = db.Conectar();
 		if (cn != null) {
 			try {
