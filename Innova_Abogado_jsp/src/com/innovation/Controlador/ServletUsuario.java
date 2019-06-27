@@ -45,7 +45,7 @@ public class ServletUsuario extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Usuario.jsp";
+			direccion = "UsuarioModificar.jsp";
 			break;
 			
 		case "INS":
@@ -105,17 +105,15 @@ public class ServletUsuario extends HttpServlet {
 			
 		case "ACT":
 			 Usuario usuarioact = new Usuario();
-			 usuarioact.setId(Integer.parseInt(request.getParameter("id_usuario")));
+			 usuarioact.setId(Integer.parseInt(request.getParameter("id")));
 			 usuarioact.setDpi(request.getParameter("dpi"));
 			 usuarioact.setNombre(request.getParameter("nombre"));
 			 usuarioact.setApellido(request.getParameter("apellido"));
 			 usuarioact.setDireccion(request.getParameter("direccion"));
-			 usuarioact.setDepartamento(Integer.parseInt(request.getParameter("id_departamento")));
-			 usuarioact.setMunicipio(Integer.parseInt(request.getParameter("id_municipio")));
 			 usuarioact.setTelefono(request.getParameter("telefono"));
 			 usuarioact.setCorreo(request.getParameter("correo"));
-			 usuarioact.setPassword(request.getParameter("passwd"));
-			 usuarioact.setTipo_usuario(Integer.parseInt(request.getParameter("tipo_usuario")));
+			 //usuarioact.setPassword(request.getParameter("passwordusu"));
+			 usuarioact.setTipo_usuario(Integer.parseInt(request.getParameter("puesto")));
 			 servicio.Actualizar(usuarioact);
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
@@ -129,7 +127,7 @@ public class ServletUsuario extends HttpServlet {
 		
 				
 		case "DEL":
-			int id_el = Integer.parseInt(request.getParameter("id_usu"));
+			int id_el = Integer.parseInt(request.getParameter("id"));
 			
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);

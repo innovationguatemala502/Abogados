@@ -197,7 +197,7 @@ public class UsuarioDAO implements ServicioUsuario {
 
 	@Override
 	public void Actualizar(Usuario usuario) {
-		String sentencia = "update login set DPI = ?,Nombre = ?,Apellido = ?,Direccion = ?,id_departamento = ?,id_municipio = ?,Telefono = ?,Correo = ?,passwd = ?,tipo_usuario = ? where id_usuario = ?";
+		String sentencia = "update usuario set DPI = ?,Nombre = ?,Apellido = ?,Direccion = ?,Telefono = ?,Correo = ?,tipo_usuario = ? where id_usuario = ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
@@ -206,13 +206,11 @@ public class UsuarioDAO implements ServicioUsuario {
 				st.setString(2, usuario.getNombre());
 				st.setString(3, usuario.getApellido());
 				st.setString(4, usuario.getDireccion());
-				st.setInt(5, usuario.getDepartamento());
-				st.setInt(6, usuario.getMunicipio());
-				st.setString(7, usuario.getTelefono());
-				st.setString(8, usuario.getCorreo());
-				st.setString(9, usuario.getPassword());
-				st.setInt(10, usuario.getTipo_usuario());
-				st.setInt(11, usuario.getId());
+				st.setString(5, usuario.getTelefono());
+				st.setString(6, usuario.getCorreo());
+				//st.setString(7, usuario.getPassword());
+				st.setInt(7, usuario.getTipo_usuario());
+				st.setInt(8, usuario.getId());
 				
 				int exec = st.executeUpdate();
 				if (exec == 0) {

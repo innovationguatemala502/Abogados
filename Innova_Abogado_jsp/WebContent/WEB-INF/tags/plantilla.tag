@@ -202,11 +202,8 @@
 										href="../Innova_Abogado_jsp/Usuario?accion=SPA"> <span class="nav-text">Crear Usuario</span>
 									</a></li>
 									<li><a class="sidenav-item-link"
-										href="#"> <span class="nav-text">
+										href="../Innova_Abogado_jsp/Usuario?accion=QRY"> <span class="nav-text">
 											Modificar Usuario</span>
-									</a></li>
-									<li><a class="sidenav-item-link" href="#"> <span
-											class="nav-text">Eliminar Usuario</span>
 									</a></li>
 									<li><a class="sidenav-item-link"
 										href="../Innova_Abogado_jsp/Juzgado?accion=SPA"> <span class="nav-text">Crear Juzgado</span>
