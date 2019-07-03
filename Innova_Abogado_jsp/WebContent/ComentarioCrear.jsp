@@ -16,7 +16,7 @@
 		<form action="Comentario" method="POST" class="form-horizontal">
 		<input type="hidden" name="accion" value="INS"/>
 			<div class="form-group">
-				<label for="InputId_usuario">Usuario</label>								
+				<label for="InputId_usuario">Cliente</label>								
 				<select class="form-control" id="InputId_usuario" name="id_usuario">
 				<c:forEach var="n" items="${listusuarios}">
 					<option value="${n.id}">${n.nombre}</option>

@@ -8,35 +8,42 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.innovation.DAO.Conexion;
-import com.innovation.Interfaz.ServicioComentario;
-import com.innovation.modelo.Comentario;
+import com.innovation.Interfaz.ServicioEscritura;
+import com.innovation.modelo.Departamento;
+import com.innovation.modelo.Escritura;
+import com.innovation.modelo.Juzgado;
+import com.innovation.modelo.Municipio;
 import com.innovation.modelo.Usuario;
 
-public class ComentarioDAO implements ServicioComentario{
+public class EscrituraDAO implements ServicioEscritura{
 
 	private final Conexion db = new Conexion();
 	private String mensaje;
 	
 	@Override
-	public List<Comentario> mostra() {
+	public List<Escritura> mostra() {
 		
-		List<Comentario> lista = null;
-		String sentencia = "select id_comentario, id_usuario,id_proceso,fecha,comentario from comentarios";
+		List<Escritura> lista = null;
+		String sentencia = "select id_escritura, finca, folio, libro, partida, Hoja_protocolo, id_cliente,descripcion,fecha from escritura";
 		Connection cn = db.Conectar();
 		
 		if (cn != null) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
 				ResultSet rs = st.executeQuery();
-				lista = new LinkedList<Comentario>();
+				lista = new LinkedList<Escritura>();
 				while (rs.next()) {
-					Comentario comentario = new Comentario();
-					comentario.setId_proceso(rs.getInt(1));
-					comentario.setId_usuario(rs.getInt(2));
-					comentario.setId_proceso(rs.getInt(3));
-					comentario.setFecha(rs.getDate(4));
-					comentario.setComentario(rs.getString(5));
-					lista.add(comentario);
+					Escritura escritura = new Escritura();
+					escritura.setId_escritura(rs.getInt(1));
+					escritura.setFinca(rs.getString(2));
+					escritura.setFolio(rs.getString(3));
+					escritura.setLibro(rs.getString(4));
+					escritura.setPartida(rs.getString(5));
+					escritura.setHoja_protocolo(rs.getString(6));
+					escritura.setId_cliente(rs.getInt(7));
+					escritura.setDescripcion(rs.getString(8));
+					escritura.setFecha(rs.getDate(9));
+					lista.add(escritura);
 				}
 				st.close();
 			} catch (SQLException e) {
@@ -56,16 +63,20 @@ public class ComentarioDAO implements ServicioComentario{
 	}
 
 	@Override
-	public void Insertar(Comentario comentario) {
-		String sentencia = "Insert into comentarios (id_usuario,id_proceso,fecha,comentario) values (?,?,?,?)";
+	public void Insertar(Escritura escritura) {
+		String sentencia = "Insert into escritura (finca,folio,libro,partida,Hoja_protocolo,id_cliente,descripcion,fecha) values (?,?,?,?,?,?,?,?)";
 		Connection cn = db.Conectar();
 		if (cn != null) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setInt(1, comentario.getId_usuario());
-				st.setInt(2, comentario.getId_proceso());
-				st.setDate(3, comentario.getFecha());
-				st.setString(4, comentario.getComentario());
+				st.setString(1, escritura.getFinca());
+				st.setString(2, escritura.getFolio());
+				st.setString(3, escritura.getLibro());
+				st.setString(4, escritura.getPartida());
+				st.setString(5, escritura.getHoja_protocolo());
+				st.setInt(6, escritura.getId_cliente());
+				st.setString(7, escritura.getDescripcion());
+				st.setDate(8, escritura.getFecha());
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();
@@ -87,22 +98,25 @@ public class ComentarioDAO implements ServicioComentario{
 	}
 
 	@Override
-	public Comentario Buscar(int id_comentario) {
-		Comentario comentario = null;
-		String sentencia = "select id_comentario, id_usuario,id_proceso,fecha,comentario from comentarios where id_comentario =  ?";
+	public Escritura Buscar(int id) {
+		Escritura escritura = null;
+		String sentencia = "select finca, folio, libro, partida, Hoja_protocolo, id_cliente,descripcion,fecha from escritura where id_escritura =  ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setInt(1, id_comentario);
+				st.setInt(1, id);
 				ResultSet rs = st.executeQuery();
 				while (rs.next()) {
-					comentario = new Comentario();
-					comentario.setId_comentario(rs.getInt(1));
-					comentario.setId_usuario(rs.getInt(2));
-					comentario.setId_proceso(rs.getInt(3));
-					comentario.setFecha(rs.getDate(4));
-					comentario.setComentario(rs.getString(5));
+					escritura = new Escritura();
+					escritura.setFinca(rs.getString(1));
+					escritura.setFolio(rs.getString(2));
+					escritura.setLibro(rs.getString(3));
+					escritura.setPartida(rs.getString(4));
+					escritura.setHoja_protocolo(rs.getString(5));
+					escritura.setId_cliente(rs.getInt(6));
+					escritura.setDescripcion(rs.getString(7));
+					escritura.setFecha(rs.getDate(8));
 				}
 				st.close();
 			} catch (SQLException e) {
@@ -117,7 +131,7 @@ public class ComentarioDAO implements ServicioComentario{
 		} else {
 			SetMensaje("Error de conexion: " + db.GetMessage());
 		}
-		return comentario;
+		return escritura;
 	}
 
 	public List<Usuario> BuscarUsuario() {
@@ -150,19 +164,22 @@ public class ComentarioDAO implements ServicioComentario{
 		}
 		return lista;
 	}
-	
-	
+
 	@Override
-	public void Actualizar(Comentario comentario) {
-		String sentencia = "update comentarios set id_usuario =?,id_proceso=?,fecha=?,comentario=? where id_comentario =  ?";
+	public void Actualizar(Escritura escritura) {
+		String sentencia = "update escritura set finca=?,folio=?,libro=?,partida=?,Hoja_protocolo=?,id_cliente=?,descripcion=? where id_escritura =  ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setInt(1, comentario.getId_usuario());
-				st.setInt(2, comentario.getId_proceso());
-				st.setDate(3, comentario.getFecha());
-				st.setString(4, comentario.getComentario());
+				st.setString(1, escritura.getFinca());
+				st.setString(2, escritura.getFolio());
+				st.setString(3, escritura.getLibro());
+				st.setString(4, escritura.getPartida());
+				st.setString(5, escritura.getHoja_protocolo());
+				st.setInt(6, escritura.getId_cliente());
+				st.setString(7, escritura.getDescripcion());
+				st.setDate(8, escritura.getFecha());
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();
@@ -184,13 +201,13 @@ public class ComentarioDAO implements ServicioComentario{
 	}
 
 	@Override
-	public void Eliminar(int id_comentario) {
-		String sentencia = "delete from comentarios where id_comentario = ?";
+	public void Eliminar(int id) {
+		String sentencia = "delete from escritura where id_escritura = ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setInt(1, id_comentario);
+				st.setInt(1, id);
 				
 				int exec = st.executeUpdate();
 				if (exec == 0) {
@@ -212,7 +229,7 @@ public class ComentarioDAO implements ServicioComentario{
 		
 	}
 
-	@Override
+    @Override
 	public String GetMensaje() {
 		return mensaje;
 	}
@@ -220,7 +237,5 @@ public class ComentarioDAO implements ServicioComentario{
 	public void SetMensaje (String msj) {
 		this.mensaje = msj;
 	}
-
-
 	
 }

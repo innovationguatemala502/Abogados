@@ -12,67 +12,79 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.innovation.Interfaz.ServicioComentario;
-import com.innovation.daoModelo.ComentarioDAO;
-import com.innovation.modelo.Comentario;
+import com.innovation.Interfaz.ServicioEscritura;
+import com.innovation.daoModelo.EscrituraDAO;
+import com.innovation.modelo.Escritura;
 import com.innovation.modelo.Usuario;
 
-@WebServlet("/Comentario")
-public class ServletComentario extends HttpServlet {
 
+/**
+ * Servlet implementation class ServletDepartamento
+ */
+@WebServlet("/Escritura")
+public class ServletEscritura extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		String accion = request.getParameter("accion");
 		String mensaje = null;
-		String msjCreado = null;
 		String direccion = null;
+		String msjCreado = null;
 		
-		ServicioComentario servicio = new ComentarioDAO();
+		ServicioEscritura servicio = new EscrituraDAO();
 		
 		switch (accion) {
 		
 		case "QRY":
-			List<Comentario> listacomentario = servicio.mostra();
-			if (listacomentario != null) {
-				request.setAttribute("lista", listacomentario);
+			List<Escritura> listajuzgado = servicio.mostra();
+			if (listajuzgado != null) {
+				request.setAttribute("lista", listajuzgado);
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Comentario.jsp";
+			direccion = "Escritura.jsp";
 			break;
 			
 		case "INS":
-			Comentario comen = new Comentario();
-			String id_usuario = request.getParameter("id_usuario");
-			String id_proceso = request.getParameter("id_proceso");
+			Escritura escritura = new Escritura();
+			String finca = request.getParameter("finca");
+			String folio = request.getParameter("folio");
+			String libro = request.getParameter("libro");
+			String partida = request.getParameter("partida");
+			String hoja_protocolo = request.getParameter("hoja_protocolo");
+			String id_cliente = request.getParameter("id_usuario");
+			String descripcion = request.getParameter("descripcion");
 			String fecha = request.getParameter("fecha");
-			String comentario = request.getParameter("comentario");
-			comen.setId_usuario(Integer.parseInt(id_usuario));
-			comen.setId_proceso(Integer.parseInt(id_proceso));
+			escritura.setFinca(finca);
+			escritura.setFolio(folio);
+			escritura.setLibro(libro);
+			escritura.setPartida(partida);
+			escritura.setHoja_protocolo(hoja_protocolo);
+			escritura.setId_cliente(Integer.parseInt(id_cliente));
+			escritura.setDescripcion(descripcion);
 			SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 			try {
 				
 				String dat=fecha;
 				long date=new SimpleDateFormat("dd/MM/yyyy").parse(dat,new ParsePosition(0)).getTime();
 				java.sql.Date dbDate=new java.sql.Date(date);
-				comen.setFecha(dbDate);
+			    escritura.setFecha(dbDate);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			comen.setComentario(comentario);
-			servicio.Insertar(comen);
+
+			servicio.Insertar(escritura);
 			mensaje = servicio.GetMensaje();
 			if (mensaje != null) {
-				direccion ="ComentarioCrear.jsp?accion=SPA";
+				direccion ="EscrituraCrear.jsp?accion=SPA";
 			} else {
-				direccion ="ComentarioCrear.jsp?accion=SPA";
-				msjCreado = "Comentario Creado exitosamente!!!";
+				direccion ="EscrituraCrear.jsp?accion=SPA";
+				msjCreado = "Escritura Creada exitosamente!!!";
 			}
 			break;
 		
@@ -83,38 +95,42 @@ public class ServletComentario extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "ComentarioCrear.jsp?accion=SPA";
-			break;				
+			direccion = "EscrituraCrear.jsp?accion=SPA";
+			break;		
 			
 		case "ACT":
-			 Comentario comenact = new Comentario();
-			 comenact.setId_comentario(Integer.parseInt(request.getParameter("id_comentario")));
-			 comenact.setId_usuario(Integer.parseInt(request.getParameter("id_usuario")));
-			 comenact.setComentario(request.getParameter("comentario"));
-			 servicio.Actualizar(comenact);
+			 Escritura escrituraact = new Escritura();
+			 escrituraact.setId_escritura(Integer.parseInt(request.getParameter("id_escritura")));
+			 escrituraact.setId_cliente(Integer.parseInt(request.getParameter("id_usuario")));
+			 escrituraact.setFinca(request.getParameter("finca"));
+			 escrituraact.setFolio(request.getParameter("folio"));
+			 escrituraact.setLibro(request.getParameter("libro"));
+			 escrituraact.setPartida(request.getParameter("partida"));
+			 escrituraact.setHoja_protocolo(request.getParameter("hoja_protocolo"));
+			 servicio.Actualizar(escrituraact );
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
-					request.setAttribute("Comentario",comenact);
-					direccion ="ComentarioCrear.jsp?accion=QRY";
+					request.setAttribute("Escritura",escrituraact);
+					direccion ="Escritura.jsp?accion=QRY";
 				} else {
-					direccion ="ComentarioCrear.jsp?accion=QRY";
-					msjCreado = "Comentario Modificado exitosamente!!!";
+					direccion ="Escritura.jsp?accion=QRY";
+					msjCreado = "Escritura Modificada exitosamente!!!";
 				}
 			break;
 		
 				
 		case "DEL":
-			int id_el = Integer.parseInt(request.getParameter("id_comentario"));
+			int id_el = Integer.parseInt(request.getParameter("id_escritura"));
 			
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);
 				mensaje = servicio.GetMensaje();
-				msjCreado = "Comentario Eliminado exitosamente!!!";
+				msjCreado = "Escritura Eliminada exitosamente!!!";
 				
 			} else {
-				direccion ="ComentarioCrear.jsp?accion=QRY";
+				direccion ="Escritura.jsp?accion=QRY";
 			}
-			direccion ="ComentarioCrear.jsp?accion=QRY";
+			direccion ="Escritura.jsp?accion=QRY";
 			break;
 		
 		}
@@ -141,6 +157,5 @@ public class ServletComentario extends HttpServlet {
 		RequestDispatcher despachador = request.getRequestDispatcher(direccion);
 		despachador.forward(request, response);
 	}
-
 	
 }
