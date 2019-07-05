@@ -9,10 +9,7 @@ import java.util.List;
 
 import com.innovation.DAO.Conexion;
 import com.innovation.Interfaz.ServicioEscritura;
-import com.innovation.modelo.Departamento;
 import com.innovation.modelo.Escritura;
-import com.innovation.modelo.Juzgado;
-import com.innovation.modelo.Municipio;
 import com.innovation.modelo.Usuario;
 
 public class EscrituraDAO implements ServicioEscritura{

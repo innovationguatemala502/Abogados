@@ -121,7 +121,7 @@
 						</a>
 							<ul class="collapse" id="testamento" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li><a class="sidenav-item-link" href="">
+									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Testamento?accion=SPA">
 											<span class="nav-text">Crear</span>
 									</a></li>
 									<li><a class="sidenav-item-link" href="#">

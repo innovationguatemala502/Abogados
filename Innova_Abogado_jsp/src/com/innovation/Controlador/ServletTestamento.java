@@ -12,17 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.innovation.Interfaz.ServicioEscritura;
-import com.innovation.daoModelo.EscrituraDAO;
-import com.innovation.modelo.Escritura;
+import com.innovation.Interfaz.ServicioTestamento;
+import com.innovation.daoModelo.TestamentoDAO;
+import com.innovation.modelo.Testamento;
 import com.innovation.modelo.Usuario;
 
-
-/**
- * Servlet implementation class ServletDepartamento
- */
-@WebServlet("/Escritura")
-public class ServletEscritura extends HttpServlet {
+@WebServlet("/Testamento")
+public class ServletTestamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,55 +31,47 @@ public class ServletEscritura extends HttpServlet {
 		String direccion = null;
 		String msjCreado = null;
 		
-		ServicioEscritura servicio = new EscrituraDAO();
+		ServicioTestamento servicio = new TestamentoDAO();
 		
 		switch (accion) {
 		
 		case "QRY":
-			List<Escritura> listaescritura = servicio.mostra();
-			if (listaescritura != null) {
-				request.setAttribute("lista", listaescritura);
+			List<Testamento> listatestamento = servicio.mostra();
+			if (listatestamento != null) {
+				request.setAttribute("lista", listatestamento);
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Escritura.jsp";
+			direccion = "Testamento.jsp";
 			break;
 			
 		case "INS":
-			Escritura escritura = new Escritura();
-			String finca = request.getParameter("finca");
-			String folio = request.getParameter("folio");
-			String libro = request.getParameter("libro");
-			String partida = request.getParameter("partida");
-			String hoja_protocolo = request.getParameter("hoja_protocolo");
+			Testamento testamento = new Testamento();
+			String no_testamento = request.getParameter("no_testamento");
 			String id_cliente = request.getParameter("id_usuario");
 			String descripcion = request.getParameter("descripcion");
 			String fecha = request.getParameter("fecha");
-			escritura.setFinca(finca);
-			escritura.setFolio(folio);
-			escritura.setLibro(libro);
-			escritura.setPartida(partida);
-			escritura.setHoja_protocolo(hoja_protocolo);
-			escritura.setId_cliente(Integer.parseInt(id_cliente));
-			escritura.setDescripcion(descripcion);
+			testamento.setNo_testamento(no_testamento);
+			testamento.setId_cliente(Integer.parseInt(id_cliente));
+			testamento.setDescripcion(descripcion);
 			try {
 				
 				String dat=fecha;
 				long date=new SimpleDateFormat("dd/MM/yyyy").parse(dat,new ParsePosition(0)).getTime();
 				java.sql.Date dbDate=new java.sql.Date(date);
-			    escritura.setFecha(dbDate);
+				testamento.setFecha(dbDate);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			servicio.Insertar(escritura);
+			servicio.Insertar(testamento);
 			mensaje = servicio.GetMensaje();
 			if (mensaje != null) {
-				direccion ="EscrituraCrear.jsp?accion=SPA";
+				direccion ="TestamentoCrear.jsp?accion=SPA";
 			} else {
-				direccion ="EscrituraCrear.jsp?accion=SPA";
-				msjCreado = "Escritura Creada exitosamente!!!";
+				direccion ="TestamentoCrear.jsp?accion=SPA";
+				msjCreado = "Testamento Creado exitosamente!!!";
 			}
 			break;
 		
@@ -94,42 +82,38 @@ public class ServletEscritura extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "EscrituraCrear.jsp?accion=SPA";
+			direccion = "TestamentoCrear.jsp?accion=SPA";
 			break;		
 			
 		case "ACT":
-			 Escritura escrituraact = new Escritura();
-			 escrituraact.setId_escritura(Integer.parseInt(request.getParameter("id_escritura")));
-			 escrituraact.setId_cliente(Integer.parseInt(request.getParameter("id_usuario")));
-			 escrituraact.setFinca(request.getParameter("finca"));
-			 escrituraact.setFolio(request.getParameter("folio"));
-			 escrituraact.setLibro(request.getParameter("libro"));
-			 escrituraact.setPartida(request.getParameter("partida"));
-			 escrituraact.setHoja_protocolo(request.getParameter("hoja_protocolo"));
-			 servicio.Actualizar(escrituraact );
+			 Testamento testamentoact = new Testamento();
+			 testamentoact.setId_testamento(Integer.parseInt(request.getParameter("id_testamento")));
+			 testamentoact.setId_cliente(Integer.parseInt(request.getParameter("id_usuario")));
+			 testamentoact.setDescripcion(request.getParameter("descripcion"));
+			 servicio.Actualizar(testamentoact);
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
-					request.setAttribute("Escritura",escrituraact);
-					direccion ="Escritura.jsp?accion=QRY";
+					request.setAttribute("Testamento",testamentoact);
+					direccion ="Testamento.jsp?accion=QRY";
 				} else {
-					direccion ="Escritura.jsp?accion=QRY";
-					msjCreado = "Escritura Modificada exitosamente!!!";
+					direccion ="Testamento.jsp?accion=QRY";
+					msjCreado = "Testamento Modificado exitosamente!!!";
 				}
 			break;
 		
 				
 		case "DEL":
-			int id_el = Integer.parseInt(request.getParameter("id_escritura"));
+			int id_el = Integer.parseInt(request.getParameter("id_testamento"));
 			
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);
 				mensaje = servicio.GetMensaje();
-				msjCreado = "Escritura Eliminada exitosamente!!!";
+				msjCreado = "Testamento Eliminado exitosamente!!!";
 				
 			} else {
-				direccion ="Escritura.jsp?accion=QRY";
+				direccion ="Testamento.jsp?accion=QRY";
 			}
-			direccion ="Escritura.jsp?accion=QRY";
+			direccion ="Testamento.jsp?accion=QRY";
 			break;
 		
 		}

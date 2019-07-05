@@ -54,7 +54,6 @@ public class ServletComentario extends HttpServlet {
 			String comentario = request.getParameter("comentario");
 			comen.setId_usuario(Integer.parseInt(id_usuario));
 			comen.setId_proceso(Integer.parseInt(id_proceso));
-			SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 			try {
 				
 				String dat=fecha;

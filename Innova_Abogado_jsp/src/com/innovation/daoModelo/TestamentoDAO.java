@@ -8,31 +8,35 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.innovation.DAO.Conexion;
-import com.innovation.Interfaz.ServicioTipoUsuario;
-import com.innovation.modelo.TipoUsuario;
+import com.innovation.Interfaz.ServicioTestamento;
+import com.innovation.modelo.Testamento;
+import com.innovation.modelo.Usuario;
 
-public class TipoUsuarioDAO implements ServicioTipoUsuario {
+public class TestamentoDAO implements ServicioTestamento {
 
 	private final Conexion db = new Conexion();
 	private String mensaje;
 	
 	@Override
-	public List<TipoUsuario> mostra() {
+	public List<Testamento> mostra() {
 		
-		List<TipoUsuario> lista = null;
-		String sentencia = "select tipo_usuario, descripcion from tipo_usuario";
+		List<Testamento> lista = null;
+		String sentencia = "select id_testamento, no_testamento, id_cliente, descripcion, fecha from testamento";
 		Connection cn = db.Conectar();
 		
 		if (cn != null) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
 				ResultSet rs = st.executeQuery();
-				lista = new LinkedList<TipoUsuario>();
+				lista = new LinkedList<Testamento>();
 				while (rs.next()) {
-					TipoUsuario tipo_usuario = new TipoUsuario();
-					tipo_usuario.setTipo_usuario(rs.getInt(1));
-					tipo_usuario.setDescripcion(rs.getString(2));
-					lista.add(tipo_usuario);
+					Testamento testamento = new Testamento();
+					testamento.setId_testamento(rs.getInt(1));
+					testamento.setNo_testamento(rs.getString(2));
+					testamento.setId_cliente(rs.getInt(3));
+					testamento.setDescripcion(rs.getString(4));
+					testamento.setFecha(rs.getDate(5));
+					lista.add(testamento);
 				}
 				st.close();
 			} catch (SQLException e) {
@@ -52,13 +56,16 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 	}
 
 	@Override
-	public void Insertar(TipoUsuario tipo_usuario) {
-		String sentencia = "Insert into tipo_usuario (descripcion) values (?)";
+	public void Insertar(Testamento testamento) {
+		String sentencia = "Insert into testamento (no_testamento,id_cliente,descripcion,fecha) values (?,?,?,?)";
 		Connection cn = db.Conectar();
 		if (cn != null) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setString(1, tipo_usuario.getDescripcion());
+				st.setString(1, testamento.getNo_testamento());
+				st.setInt(2, testamento.getId_cliente());
+				st.setString(3, testamento.getDescripcion());
+				st.setDate(4, testamento.getFecha());
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();
@@ -80,9 +87,9 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 	}
 
 	@Override
-	public TipoUsuario Buscar(int id) {
-		TipoUsuario tipo_usuario = null;
-		String sentencia = "select tipo_usuario, descripcion from tipo_usuario where tipo_usuario =  ?";
+	public Testamento Buscar(int id) {
+		Testamento testamento= null;
+		String sentencia = "select no_testamento, id_cliente, descripcion, fecha from testamento where id_testamento =  ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
@@ -90,9 +97,11 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 				st.setInt(1, id);
 				ResultSet rs = st.executeQuery();
 				while (rs.next()) {
-					tipo_usuario = new TipoUsuario();
-					tipo_usuario.setTipo_usuario(rs.getInt(1));
-					tipo_usuario.setDescripcion(rs.getString(2));
+					testamento = new Testamento();
+					testamento.setNo_testamento(rs.getString(1));
+					testamento.setId_cliente(rs.getInt(2));
+					testamento.setDescripcion(rs.getString(3));
+					testamento.setFecha(rs.getDate(4));
 				}
 				st.close();
 			} catch (SQLException e) {
@@ -107,18 +116,50 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 		} else {
 			SetMensaje("Error de conexion: " + db.GetMessage());
 		}
-		return tipo_usuario;
+		return testamento;
 	}
 
-	@Override
-	public void Actualizar(TipoUsuario tipo_usuario) {
-		String sentencia = "update tipo_usuario set descripcion =? where tipo_usuario =  ?";
+	public List<Usuario> BuscarUsuario() {
+		List<Usuario> lista = null;
+		String sentencia = "select id_usuario,CONCAT(Nombre, ' ', Apellido) As Nombre from usuario";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
 				PreparedStatement st = cn.prepareStatement(sentencia);
-				st.setString(1, tipo_usuario.getDescripcion());
-				st.setInt(2, tipo_usuario.getTipo_usuario());
+				ResultSet rs = st.executeQuery();
+				lista = new LinkedList<Usuario>();
+				while (rs.next()) {
+					Usuario usuario = new Usuario();
+					usuario.setId(rs.getInt(1));
+					usuario.setNombre(rs.getString(2));
+					lista.add(usuario);
+				}
+				st.close();
+			} catch (SQLException e) {
+				SetMensaje("Problema con Consultar: " + e.getMessage());
+			} finally {
+				try {
+					cn.close();
+				}catch (SQLException ex) {
+					 SetMensaje(ex.getMessage());
+				}
+			}
+		} else {
+			SetMensaje("Error de conexion: " + db.GetMessage());
+		}
+		return lista;
+	}
+
+	@Override
+	public void Actualizar(Testamento testamento) {
+		String sentencia = "update testamento set no_testamento=?,id_cliente=?,descripcion=? where testamento =  ?";
+		Connection cn = db.Conectar();
+		if (cn != null ) {
+			try {
+				PreparedStatement st = cn.prepareStatement(sentencia);
+				st.setString(1, testamento.getNo_testamento());
+				st.setInt(2, testamento.getId_cliente());
+				st.setString(3, testamento.getDescripcion());
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();
@@ -141,7 +182,7 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 
 	@Override
 	public void Eliminar(int id) {
-		String sentencia = "delete from tipo_usuario where tipo_usuario = ?";
+		String sentencia = "delete from testamento where id_testamento = ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
@@ -176,5 +217,5 @@ public class TipoUsuarioDAO implements ServicioTipoUsuario {
 	public void SetMensaje (String msj) {
 		this.mensaje = msj;
 	}
-	
+
 }
