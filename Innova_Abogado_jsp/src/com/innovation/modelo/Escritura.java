@@ -9,8 +9,9 @@ public class Escritura {
 	private String folio;
 	private String libro;
 	private String partida;
-	private String Hoja_protocolo;
+	private String hoja_protocolo;
 	private int id_cliente;
+	private String nombre_cliente;
 	private String descripcion;
 	private Date fecha;
 
@@ -55,11 +56,11 @@ public class Escritura {
 	}
 
 	public String getHoja_protocolo() {
-		return Hoja_protocolo;
+		return hoja_protocolo;
 	}
 
 	public void setHoja_protocolo(String hoja_protocolo) {
-		Hoja_protocolo = hoja_protocolo;
+		this.hoja_protocolo = hoja_protocolo;
 	}
 
 	public int getId_cliente() {
@@ -68,6 +69,14 @@ public class Escritura {
 
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
+	}
+	
+	public String getNombre_cliente() {
+		return nombre_cliente;
+	}
+
+	public void setNombre_cliente(String nombre_cliente) {
+		this.nombre_cliente = nombre_cliente;
 	}
 
 	public String getDescripcion() {

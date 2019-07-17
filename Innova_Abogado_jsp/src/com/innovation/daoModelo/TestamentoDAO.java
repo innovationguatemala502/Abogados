@@ -21,7 +21,7 @@ public class TestamentoDAO implements ServicioTestamento {
 	public List<Testamento> mostra() {
 		
 		List<Testamento> lista = null;
-		String sentencia = "select id_testamento, no_testamento, id_cliente, descripcion, fecha from testamento";
+		String sentencia = "select id_testamento, no_testamento, id_cliente, nombre, descripcion, fecha from testamento, usuario where id_usuario = id_cliente";
 		Connection cn = db.Conectar();
 		
 		if (cn != null) {
@@ -34,8 +34,9 @@ public class TestamentoDAO implements ServicioTestamento {
 					testamento.setId_testamento(rs.getInt(1));
 					testamento.setNo_testamento(rs.getString(2));
 					testamento.setId_cliente(rs.getInt(3));
-					testamento.setDescripcion(rs.getString(4));
-					testamento.setFecha(rs.getDate(5));
+					testamento.setNombre_cliente(rs.getString(4));
+					testamento.setDescripcion(rs.getString(5));
+					testamento.setFecha(rs.getDate(6));
 					lista.add(testamento);
 				}
 				st.close();
@@ -152,7 +153,7 @@ public class TestamentoDAO implements ServicioTestamento {
 
 	@Override
 	public void Actualizar(Testamento testamento) {
-		String sentencia = "update testamento set no_testamento=?,id_cliente=?,descripcion=? where testamento =  ?";
+		String sentencia = "update testamento set no_testamento=?,id_cliente=?,descripcion=? where id_testamento =  ?";
 		Connection cn = db.Conectar();
 		if (cn != null ) {
 			try {
@@ -160,6 +161,7 @@ public class TestamentoDAO implements ServicioTestamento {
 				st.setString(1, testamento.getNo_testamento());
 				st.setInt(2, testamento.getId_cliente());
 				st.setString(3, testamento.getDescripcion());
+				st.setInt(4,testamento.getId_testamento());
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();

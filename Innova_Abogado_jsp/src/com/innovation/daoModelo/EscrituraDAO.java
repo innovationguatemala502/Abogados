@@ -21,7 +21,7 @@ public class EscrituraDAO implements ServicioEscritura{
 	public List<Escritura> mostra() {
 		
 		List<Escritura> lista = null;
-		String sentencia = "select id_escritura, finca, folio, libro, partida, Hoja_protocolo, id_cliente,descripcion,fecha from escritura";
+		String sentencia = "select id_escritura, finca, folio, libro, partida, Hoja_protocolo, id_cliente, nombre, descripcion,fecha from escritura, usuario where id_usuario = id_cliente;";
 		Connection cn = db.Conectar();
 		
 		if (cn != null) {
@@ -38,8 +38,9 @@ public class EscrituraDAO implements ServicioEscritura{
 					escritura.setPartida(rs.getString(5));
 					escritura.setHoja_protocolo(rs.getString(6));
 					escritura.setId_cliente(rs.getInt(7));
-					escritura.setDescripcion(rs.getString(8));
-					escritura.setFecha(rs.getDate(9));
+					escritura.setNombre_cliente(rs.getString(8));
+					escritura.setDescripcion(rs.getString(9));
+					escritura.setFecha(rs.getDate(10));
 					lista.add(escritura);
 				}
 				st.close();
@@ -176,7 +177,7 @@ public class EscrituraDAO implements ServicioEscritura{
 				st.setString(5, escritura.getHoja_protocolo());
 				st.setInt(6, escritura.getId_cliente());
 				st.setString(7, escritura.getDescripcion());
-				st.setDate(8, escritura.getFecha());
+				st.setInt(8, escritura.getId_escritura());;
 				int exec = st.executeUpdate();
 				if (exec == 0) {
 					throw new SQLException();

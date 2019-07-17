@@ -46,7 +46,7 @@ public class ServletEscritura extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Escritura.jsp";
+			direccion = "EscrituraModificar.jsp";
 			break;
 			
 		case "INS":
@@ -100,26 +100,27 @@ public class ServletEscritura extends HttpServlet {
 		case "ACT":
 			 Escritura escrituraact = new Escritura();
 			 escrituraact.setId_escritura(Integer.parseInt(request.getParameter("id_escritura")));
-			 escrituraact.setId_cliente(Integer.parseInt(request.getParameter("id_usuario")));
+			 escrituraact.setId_cliente(Integer.parseInt(request.getParameter("cliente")));
 			 escrituraact.setFinca(request.getParameter("finca"));
 			 escrituraact.setFolio(request.getParameter("folio"));
 			 escrituraact.setLibro(request.getParameter("libro"));
 			 escrituraact.setPartida(request.getParameter("partida"));
-			 escrituraact.setHoja_protocolo(request.getParameter("hoja_protocolo"));
+			 escrituraact.setHoja_protocolo(request.getParameter("protocolo"));
+			 escrituraact.setDescripcion(request.getParameter("descripcion"));;
 			 servicio.Actualizar(escrituraact );
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
 					request.setAttribute("Escritura",escrituraact);
-					direccion ="Escritura.jsp?accion=QRY";
+					direccion ="Escritura?accion=QRY";
 				} else {
-					direccion ="Escritura.jsp?accion=QRY";
+					direccion ="Escritura?accion=QRY";
 					msjCreado = "Escritura Modificada exitosamente!!!";
 				}
 			break;
 		
 				
 		case "DEL":
-			int id_el = Integer.parseInt(request.getParameter("id_escritura"));
+			int id_el = Integer.parseInt(request.getParameter("id_esc"));
 			
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);
@@ -127,9 +128,9 @@ public class ServletEscritura extends HttpServlet {
 				msjCreado = "Escritura Eliminada exitosamente!!!";
 				
 			} else {
-				direccion ="Escritura.jsp?accion=QRY";
+				direccion ="Escritura?accion=QRY";
 			}
-			direccion ="Escritura.jsp?accion=QRY";
+			direccion ="Escritura?accion=QRY";
 			break;
 		
 		}

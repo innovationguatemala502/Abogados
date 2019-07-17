@@ -42,7 +42,7 @@ public class ServletTestamento extends HttpServlet {
 			} else {
 				mensaje = servicio.GetMensaje();
 			}
-			direccion = "Testamento.jsp";
+			direccion = "TestamentoModificar.jsp";
 			break;
 			
 		case "INS":
@@ -87,23 +87,24 @@ public class ServletTestamento extends HttpServlet {
 			
 		case "ACT":
 			 Testamento testamentoact = new Testamento();
-			 testamentoact.setId_testamento(Integer.parseInt(request.getParameter("id_testamento")));
-			 testamentoact.setId_cliente(Integer.parseInt(request.getParameter("id_usuario")));
+			 testamentoact.setId_testamento(Integer.parseInt(request.getParameter("id")));
+			 testamentoact.setNo_testamento(request.getParameter("num_testamento"));
+			 testamentoact.setId_cliente(Integer.parseInt(request.getParameter("cliente")));
 			 testamentoact.setDescripcion(request.getParameter("descripcion"));
 			 servicio.Actualizar(testamentoact);
 			 mensaje = servicio.GetMensaje();
 			 if (mensaje != null) {
 					request.setAttribute("Testamento",testamentoact);
-					direccion ="Testamento.jsp?accion=QRY";
+					direccion ="Testamento?accion=QRY";
 				} else {
-					direccion ="Testamento.jsp?accion=QRY";
+					direccion ="Testamento?accion=QRY";
 					msjCreado = "Testamento Modificado exitosamente!!!";
 				}
 			break;
 		
 				
 		case "DEL":
-			int id_el = Integer.parseInt(request.getParameter("id_testamento"));
+			int id_el = Integer.parseInt(request.getParameter("id_test"));
 			
 			if (id_el != 0) {
 				servicio.Eliminar(id_el);
@@ -111,9 +112,9 @@ public class ServletTestamento extends HttpServlet {
 				msjCreado = "Testamento Eliminado exitosamente!!!";
 				
 			} else {
-				direccion ="Testamento.jsp?accion=QRY";
+				direccion ="Testamento?accion=QRY";
 			}
-			direccion ="Testamento.jsp?accion=QRY";
+			direccion ="Testamento?accion=QRY";
 			break;
 		
 		}

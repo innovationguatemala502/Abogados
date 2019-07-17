@@ -105,7 +105,7 @@
 									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Escritura?accion=SPA">
 											<span class="nav-text">Crear</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="#">
+									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Escritura?accion=QRY">
 											<span class="nav-text">Modificar</span>
 									</a></li>
 									<li><a class="sidenav-item-link" href="#">
@@ -124,7 +124,7 @@
 									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Testamento?accion=SPA">
 											<span class="nav-text">Crear</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="#">
+									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Testamento?accion=QRY">
 											<span class="nav-text">Modificar</span>
 									</a></li>
 									<li><a class="sidenav-item-link" href="#">

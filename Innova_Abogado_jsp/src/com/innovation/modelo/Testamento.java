@@ -9,6 +9,7 @@ public class Testamento {
 	private int id_cliente;
 	private String descripcion;
 	private Date fecha;
+	private String nombre_cliente;
 
 	public int getId_testamento() {
 		return id_testamento;
@@ -48,6 +49,14 @@ public class Testamento {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	
+	public String getNombre_cliente() {
+		return nombre_cliente;
+	}
+
+	public void setNombre_cliente(String nombre) {
+		this.nombre_cliente = nombre;
 	}
 
 }
