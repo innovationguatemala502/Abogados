@@ -69,8 +69,8 @@
 			</div>			
 			<div class="form-group">
 				<label for="InputPassword">Password</label>
-				<input type="password" class="form-control" id="InputPassword"
-								name="password" value="${usuario.password}"
+				<input type="Password" class="form-control" id="InputPasswd"
+								name="passwd" value="${usuario.passwd}"
 								placeholder="Password del Usuario">
 			</div>
 			<div class="form-group">

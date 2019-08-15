@@ -140,7 +140,7 @@
 						</a>
 							<ul class="collapse" id="penales" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li><a class="sidenav-item-link" href="#">
+									<li><a class="sidenav-item-link" href="../Innova_Abogado_jsp/Procesos_penales?accion=SPA">
 											<span class="nav-text">Crear</span>
 									</a></li>
 									<li><a class="sidenav-item-link" href="#">
